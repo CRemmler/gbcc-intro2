@@ -100,11 +100,8 @@ io.on('connection', function(socket){
 					// it's gbcc, so send student a teacher interface
 					socket.emit("display interface", {userType: "teacher", room: myRoom, components: config.interfaceJs.teacherComponents});				
 					var dataObject
-					console.log("gbcc");
 					if (roomData[myRoom].userData != {}) {
-						console.log("there is userData");
 						for (var j=0; j < roomData[myRoom].canvasOrder.length; j++) {
-							console.log("from user "+roomData[myRoom].canvasOrder[j]);
 							if (roomData[myRoom].userData[roomData[myRoom].canvasOrder[j]]["canvas"] != undefined) {
 								dataObject = {
 									hubnetMessageSource: roomData[myRoom].canvasOrder[j],
@@ -187,7 +184,6 @@ io.on('connection', function(socket){
 		var destination = data.hubnetMessageSource;
 			if (roomData[myRoom].userData[myUserId]) {
 			if (( data.hubnetMessageTag === "canvas") && (roomData[myRoom].userData[myUserId]["canvas"] === undefined)) {
-				console.log("add "+myUserId+" to canvasOrder");
 				roomData[myRoom].canvasOrder.push(myUserId);
 			}
 			if (destination === "server") {
