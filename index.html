@@ -60171,7 +60171,7 @@ end
 
 to share-code
   hubnet-send "server" "code-example" code-example
-  hubnet-send "server" "canvas" ""
+  ;; hubnet-send "server" "canvas" "" ;; sending canvas twice crashes safari
   hubnet-send "all-users" "canvas" ""
 end
 

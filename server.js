@@ -198,6 +198,9 @@ io.on('connection', function(socket){
 					activityType: activityType
 				};
 			 	if (destination === "all-users"){
+					// don't send canvas, twice. Improve with new gbcc primitive like gbcc-broadcast ["canvas" [ "plot" "population"]]
+					roomData[myRoom].userData[myUserId][data.hubnetMessageTag] = data.hubnetMessage;
+					dataObject.hubnetMessage = data.hubnetMessage;
 					socket.to(myRoom+"-teacher").emit("display reporter", dataObject);
 					socket.to(myRoom+"-student").emit("display reporter", dataObject);
 					socket.emit("display reporter", dataObject);
