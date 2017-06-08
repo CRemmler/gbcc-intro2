@@ -47225,21 +47225,13 @@ c=e.buttons;A=0;if(e.enabled!==!1){for(b in c)a.addButton(c[b]);u(a,"destroy",a.
         var miniCanvas = document.getElementById("miniCanvas");
         var miniCtx = miniCanvas.getContext('2d');
         miniCtx.drawImage(document.getElementsByClassName("netlogo-canvas")[0], 0, 0, 200, 200);
-        setTimeout(function() {
-          message = document.getElementById("miniCanvas").toDataURL("image/jpeg");
-          socket.emit("send reporter", {
-            hubnetMessageSource: messageSource, 
-            hubnetMessageTag: messageTag, 
-            hubnetMessage: message
-          });
-        }, 150);
-      } else {
-        socket.emit("send reporter", {
-          hubnetMessageSource: messageSource, 
-          hubnetMessageTag: messageTag, 
-          hubnetMessage: message
-        });
-      }
+        message = document.getElementById("miniCanvas").toDataURL("image/jpeg");
+      } 
+      socket.emit("send reporter", {
+        hubnetMessageSource: messageSource, 
+        hubnetMessageTag: messageTag, 
+        hubnetMessage: message
+      });
     };
     
     HubnetManager.prototype.gbccRunCode = function(x) {
