@@ -1658,6 +1658,7 @@ img.link-img {
     </div>
 </div>
 
+    <canvas id="miniCanvas" width="200" height="200" style="display:none"></canvas>
     <div id="netlogo-model-container" style="display: inline-block; padding:0px"></div>
     <script type="text/javascript" src="js/tortoiseCompiler.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -47221,13 +47222,18 @@ c=e.buttons;A=0;if(e.enabled!==!1){for(b in c)a.addButton(c[b]);u(a,"destroy",a.
     
     HubnetManager.prototype.hubnetSend = function(messageSource, messageTag, message) {
       if (messageTag === "canvas") {
-        message = document.getElementsByClassName("netlogo-canvas")[0].toDataURL("image/jpeg");
+        var miniCanvas = document.getElementById("miniCanvas");
+        var miniCtx = miniCanvas.getContext('2d');
+        miniCtx.drawImage(document.getElementsByClassName("netlogo-canvas")[0], 0, 0, 200, 200);
+        message = document.getElementById("miniCanvas").toDataURL("image/jpeg");
       }
       socket.emit("send reporter", {
         hubnetMessageSource: messageSource, 
         hubnetMessageTag: messageTag, 
         hubnetMessage: message
       });
+      
+      
     };
     
     HubnetManager.prototype.gbccRunCode = function(x) {
